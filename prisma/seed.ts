@@ -1,10 +1,11 @@
 import { PrismaClient } from '@prisma/client';
 import { seedRegions } from './seeders/region.seeder';
-
+import { seedProductTypes } from './seeders/product-types.seeder';
 const prisma = new PrismaClient();
 
 async function main() {
   await seedRegions();
+  await seedProductTypes();
 }
 
 main()

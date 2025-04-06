@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { RegionRepository } from 'src/regions/domain/ports/region.repository';
 import { Region } from 'src/regions/domain/entities/region.entity';
 
+@Injectable()
 export class GetRegionByIdUseCase {
   constructor(
     @Inject('RegionRepository')

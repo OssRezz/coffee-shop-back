@@ -14,8 +14,35 @@ datasource db {
 }
 
 model Region {
-  id   Int    @id @default(autoincrement())
-  name String
+  id       Int       @id @default(autoincrement())
+  name     String
+  products Product[]
 
   @@map("regions")
+}
+
+model ProductType {
+  id       Int       @id @default(autoincrement())
+  name     String
+  products Product[]
+
+  @@map("product_types")
+}
+
+model Product {
+  id            Int      @id @default(autoincrement())
+  name          String
+  productTypeId Int      @map("product_type_id")
+  regionId      Int      @map("region_id")
+  description   String   @db.Text
+  price         Decimal  @db.Decimal(10, 3)
+  image         String?
+  status        Boolean  @default(true)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  productType ProductType @relation(fields: [productTypeId], references: [id])
+  region      Region      @relation(fields: [regionId], references: [id])
+
+  @@map("products")
 }

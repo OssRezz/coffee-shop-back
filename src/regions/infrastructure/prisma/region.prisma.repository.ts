@@ -53,4 +53,13 @@ export class RegionPrismaRepository implements RegionRepository {
       throw new InternalServerErrorException(`Error getting region ${id}`);
     }
   }
+
+  async exists(id: number): Promise<boolean> {
+    const found = await this.prisma.region.findUnique({
+      where: { id },
+      select: { id: true }, // solo seleccionamos el id
+    });
+
+    return !!found;
+  }
 }
