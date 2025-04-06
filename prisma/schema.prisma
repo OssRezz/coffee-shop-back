@@ -72,3 +72,13 @@ model Entry {
 
   @@map("entries")
 }
+
+model Customer {
+  id             Int    @id @default(autoincrement())
+  documentNumber String @unique @map("document_number")
+  name           String
+  email          String @unique
+  cellphone      String
+
+  @@map("customers")
+}
