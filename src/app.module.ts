@@ -6,6 +6,9 @@ import { ProductModule } from './products/product.module';
 import { InventoryModule } from './inventories/inventory.module';
 import { EntryModule } from './entries/entry.module';
 import { CustomerModule } from './customers/customer.module';
+import { TransactionModule } from './transactions/transaction.module';
+import { HttpModule } from '@nestjs/axios';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -15,6 +18,11 @@ import { CustomerModule } from './customers/customer.module';
     InventoryModule,
     EntryModule,
     CustomerModule,
+    TransactionModule,
+    HttpModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
   ],
   controllers: [],
   providers: [WinstonLogger],
