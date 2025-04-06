@@ -5,6 +5,7 @@ import { ProductTypeModule } from './product-types/product-type.module';
 import { ProductModule } from './products/product.module';
 import { InventoryModule } from './inventories/inventory.module';
 import { EntryModule } from './entries/entry.module';
+import { CustomerModule } from './customers/customer.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { EntryModule } from './entries/entry.module';
     ProductModule,
     InventoryModule,
     EntryModule,
+    CustomerModule,
   ],
   controllers: [],
   providers: [WinstonLogger],
