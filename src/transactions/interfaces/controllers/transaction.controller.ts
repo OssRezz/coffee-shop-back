@@ -5,6 +5,8 @@ import { GetWompiAcceptanceTokenUseCase } from 'src/transactions/application/use
 import { WompiCreateTransactionDto } from '../dto/wompi-create-transaction.dto';
 import { WompiCreateTransactionUseCase } from 'src/transactions/application/use-cases/create-wompi-transaction.use-case';
 import { GetWompiTransactionStatusUseCase } from 'src/transactions/application/use-cases/get-wompi-transaction-status.use-case';
+import { CreateTransactionDto } from '../dto/create-transaction.dto';
+import { PurchaseOrderUseCase } from 'src/transactions/application/use-cases/purchase-order.use-case';
 
 @Controller('transactions')
 export class TransactionController {
@@ -13,7 +15,13 @@ export class TransactionController {
     private readonly getWompiAcceptanceTokenUseCase: GetWompiAcceptanceTokenUseCase,
     private readonly createWompiTransactionUseCase: WompiCreateTransactionUseCase,
     private readonly getWompiStatusUseCase: GetWompiTransactionStatusUseCase,
+    private readonly purchaseOrderUseCase: PurchaseOrderUseCase,
   ) {}
+
+  @Post('checkout')
+  async checkout(@Body() dto: CreateTransactionDto) {
+    return await this.purchaseOrderUseCase.execute(dto);
+  }
 
   @Post('/wompi/tokenize')
   async tokenize(@Body() dto: WompiTokenizeCardDto) {

@@ -74,11 +74,34 @@ model Entry {
 }
 
 model Customer {
-  id             Int    @id @default(autoincrement())
-  documentNumber String @unique @map("document_number")
+  id             Int           @id @default(autoincrement())
+  documentNumber String        @unique @map("document_number")
   name           String
-  email          String @unique
+  email          String        @unique
   cellphone      String
+  transactions   Transaction[]
 
   @@map("customers")
+}
+
+enum TransactionStatus {
+  PENDING
+  APPROVED
+  DECLINED
+  VOIDED
+  ERROR
+}
+
+model Transaction {
+  id            Int               @id @default(autoincrement())
+  customerId    Int               @map("customer_id")
+  transactionId String            @unique
+  reference     String
+  status        TransactionStatus
+  createdAt     DateTime          @default(now()) @map("created_at")
+  updatedAt     DateTime          @updatedAt @map("updated_at")
+
+  customer Customer @relation(fields: [customerId], references: [id])
+
+  @@map("transactions")
 }
