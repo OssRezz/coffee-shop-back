@@ -37,6 +37,9 @@ class CustomerDataDto {
 
   @IsString()
   cellphone: string;
+
+  @IsString()
+  address: string;
 }
 
 class ProductDto {

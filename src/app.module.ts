@@ -9,6 +9,7 @@ import { CustomerModule } from './customers/customer.module';
 import { TransactionModule } from './transactions/transaction.module';
 import { HttpModule } from '@nestjs/axios';
 import { ConfigModule } from '@nestjs/config';
+import { SaleModule } from './sales/sale.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ConfigModule } from '@nestjs/config';
     EntryModule,
     CustomerModule,
     TransactionModule,
+    SaleModule,
     HttpModule,
     ConfigModule.forRoot({
       isGlobal: true,

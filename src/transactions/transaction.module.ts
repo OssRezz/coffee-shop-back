@@ -12,9 +12,11 @@ import { PurchaseOrderUseCase } from './application/use-cases/purchase-order.use
 import { CustomerPrismaRepository } from 'src/customers/infrastructure/prisma/customer.prisma.repository';
 import { TransactionPrismaRepository } from './infrastructure/prisma/transaction.prisma.repository';
 import { InventoryPrismaRepository } from 'src/inventories/infrastructure/prisma/inventory.prisma.repository';
+import { CreateSaleUseCase } from 'src/sales/application/use-cases/create-sale.use-case';
+import { SaleModule } from 'src/sales/sale.module';
 
 @Module({
-  imports: [HttpModule],
+  imports: [HttpModule, SaleModule],
   controllers: [TransactionController],
   providers: [
     WinstonLogger,
@@ -28,6 +30,7 @@ import { InventoryPrismaRepository } from 'src/inventories/infrastructure/prisma
     TransactionPrismaRepository,
     CustomerPrismaRepository,
     InventoryPrismaRepository,
+    CreateSaleUseCase,
     {
       provide: 'WompiPaymentGatewayPort',
       useClass: WompiGateway,
@@ -43,6 +46,10 @@ import { InventoryPrismaRepository } from 'src/inventories/infrastructure/prisma
     {
       provide: 'InventoryRepository',
       useClass: InventoryPrismaRepository,
+    },
+    {
+      provide: 'CreateSaleUseCase',
+      useClass: CreateSaleUseCase,
     },
   ],
   exports: [],
