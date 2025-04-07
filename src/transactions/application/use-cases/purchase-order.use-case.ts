@@ -15,6 +15,7 @@ import { WinstonLogger } from 'src/common/logger/winston-logger.service';
 import { TransactionRepository } from 'src/transactions/domain/ports/transaction.repository';
 import { CreateTransactionDto } from 'src/transactions/interfaces/dto/create-transaction.dto';
 import { InventoryRepository } from 'src/inventories/domain/ports/inventory.repository';
+import { CreateSaleUseCase } from 'src/sales/application/use-cases/create-sale.use-case';
 
 @Injectable()
 export class PurchaseOrderUseCase {
@@ -30,6 +31,9 @@ export class PurchaseOrderUseCase {
 
     @Inject('InventoryRepository')
     private readonly inventoryRepository: InventoryRepository,
+
+    @Inject('CreateSaleUseCase')
+    private readonly createSaleUseCase: CreateSaleUseCase,
 
     private readonly prisma: PrismaService,
     private readonly logger: WinstonLogger,
@@ -130,11 +134,20 @@ export class PurchaseOrderUseCase {
 
       // 8. Si fue aprobada, continuar con la venta, productos y reducción de inventario
       if (finalStatus === 'APPROVED') {
-        await this.prisma.$transaction(async (tx) => {
-          // Aquí podés hacer:
-          // - crear venta
-          // - crear productos vendidos
-          // - descontar inventario
+        const totalAmount = products.reduce(
+          (sum, p) => sum + p.price * p.quantity,
+          0,
+        );
+
+        await this.createSaleUseCase.execute({
+          transactionId: null,
+          address: customer.address,
+          totalAmount: amountInCents,
+          details: products.map((p) => ({
+            productId: p.productId,
+            price: p.price,
+            quantity: p.quantity,
+          })),
         });
       }
 

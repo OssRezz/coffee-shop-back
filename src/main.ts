@@ -33,6 +33,8 @@ async function bootstrap() {
   ensureUploadFolderExists();
   app.use('/uploads', express.static(join(process.cwd(), 'uploads')));
   // console.log('Serving from:', join(__dirname, '..', 'uploads'));
-  await app.listen(process.env.PORT ?? 3000);
+  const PORT = process.env.PORT || 3000;
+  await app.listen(PORT);
+  console.log(`🚀 App is running on http://localhost:${PORT}`);
 }
 bootstrap();
