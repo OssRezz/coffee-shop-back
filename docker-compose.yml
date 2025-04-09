@@ -1,0 +1,11 @@
+services:
+  backend:
+    build: .
+    container_name: coffee-shop-backend
+    ports:
+      - "4002:3000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
+    env_file:
+      - .env
