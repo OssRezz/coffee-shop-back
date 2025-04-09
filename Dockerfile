@@ -9,12 +9,18 @@ RUN npm run build
 # Etapa 2: producción
 FROM node:20-alpine
 WORKDIR /app
+
+# Copiar archivos necesarios
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/uploads ./uploads
-COPY --from=builder /app/logs ./logs
+
+# Crear carpetas de runtime
+RUN mkdir -p ./uploads ./logs
+
+# Instalar solo dependencias de producción
 RUN npm install --omit=dev
+
 ENV NODE_ENV production
 EXPOSE 3000
 CMD ["node", "dist/src/main"]
