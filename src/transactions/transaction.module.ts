@@ -14,6 +14,7 @@ import { TransactionPrismaRepository } from './infrastructure/prisma/transaction
 import { InventoryPrismaRepository } from 'src/inventories/infrastructure/prisma/inventory.prisma.repository';
 import { CreateSaleUseCase } from 'src/sales/application/use-cases/create-sale.use-case';
 import { SaleModule } from 'src/sales/sale.module';
+import { GetTransactionWithSalesUseCase } from './application/use-cases/get-transaction-by-transaction-Id.use-case';
 
 @Module({
   imports: [HttpModule, SaleModule],
@@ -31,6 +32,7 @@ import { SaleModule } from 'src/sales/sale.module';
     CustomerPrismaRepository,
     InventoryPrismaRepository,
     CreateSaleUseCase,
+    GetTransactionWithSalesUseCase,
     {
       provide: 'WompiPaymentGatewayPort',
       useClass: WompiGateway,

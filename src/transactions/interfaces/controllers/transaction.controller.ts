@@ -7,6 +7,8 @@ import { WompiCreateTransactionUseCase } from 'src/transactions/application/use-
 import { GetWompiTransactionStatusUseCase } from 'src/transactions/application/use-cases/get-wompi-transaction-status.use-case';
 import { CreateTransactionDto } from '../dto/create-transaction.dto';
 import { PurchaseOrderUseCase } from 'src/transactions/application/use-cases/purchase-order.use-case';
+import { GetTransactionWithSalesUseCase } from 'src/transactions/application/use-cases/get-transaction-by-transaction-Id.use-case';
+import { buildResponse } from 'src/common/helpers/response.helper';
 
 @Controller('transactions')
 export class TransactionController {
@@ -16,11 +18,23 @@ export class TransactionController {
     private readonly createWompiTransactionUseCase: WompiCreateTransactionUseCase,
     private readonly getWompiStatusUseCase: GetWompiTransactionStatusUseCase,
     private readonly purchaseOrderUseCase: PurchaseOrderUseCase,
+    private readonly getTransactionWithSalesUseCase: GetTransactionWithSalesUseCase,
   ) {}
 
   @Post('checkout')
   async checkout(@Body() dto: CreateTransactionDto) {
     return await this.purchaseOrderUseCase.execute(dto);
+  }
+
+  @Get('/:transactionId')
+  async getTransaction(@Param('transactionId') transactionId: string) {
+    const transaction =
+      await this.getTransactionWithSalesUseCase.execute(transactionId);
+
+    return buildResponse(
+      transaction,
+      `Transaction with id ${transactionId} found`,
+    );
   }
 
   @Post('/wompi/tokenize')

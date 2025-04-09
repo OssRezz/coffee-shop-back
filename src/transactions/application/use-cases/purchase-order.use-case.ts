@@ -96,7 +96,7 @@ export class PurchaseOrderUseCase {
       let finalStatus = wompiTransaction.status;
 
       // 6. Guardar transacción inicial (aunque esté en PENDING)
-      await this.transactionRepository.create(
+      const transaction = await this.transactionRepository.create(
         {
           customerId: customerRecord.id,
           transactionId: wompiTransaction.id,
@@ -140,7 +140,7 @@ export class PurchaseOrderUseCase {
         );
 
         await this.createSaleUseCase.execute({
-          transactionId: null,
+          transactionId: transaction.id,
           address: customer.address,
           totalAmount: amountInCents,
           details: products.map((p) => ({

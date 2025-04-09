@@ -1,8 +1,7 @@
-// src/transactions/domain/ports/transaction.repository.ts
-
 import { Transaction } from '../domain/transaction.entity';
 import { TransactionStatus } from '@prisma/client';
 import { Prisma } from '@prisma/client';
+import { TransactionWithSalesDto } from '../domain/transaction-with-sales.dto';
 
 export interface TransactionRepository {
   create(
@@ -19,4 +18,8 @@ export interface TransactionRepository {
     transactionId: string,
     status: TransactionStatus,
   ): Promise<Transaction>;
+
+  getTransactionWithSales(
+    transactionId: string,
+  ): Promise<TransactionWithSalesDto>;
 }

@@ -1,11 +1,19 @@
-// src/transactions/infrastructure/prisma/transaction.prisma.repository.ts
-
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TransactionRepository } from 'src/transactions/domain/ports/transaction.repository';
 import { TransactionStatus, Prisma } from '@prisma/client';
 import { WinstonLogger } from 'src/common/logger/winston-logger.service';
 import { Transaction } from 'src/transactions/domain/domain/transaction.entity';
+import {
+  ProductDto,
+  SaleDetailDto,
+  SaleDto,
+  TransactionWithSalesDto,
+} from 'src/transactions/domain/domain/transaction-with-sales.dto';
 
 @Injectable()
 export class TransactionPrismaRepository implements TransactionRepository {
@@ -74,6 +82,64 @@ export class TransactionPrismaRepository implements TransactionRepository {
       throw new InternalServerErrorException(
         'Error updating transaction status',
       );
+    }
+  }
+
+  async getTransactionWithSales(
+    transactionId: string,
+  ): Promise<TransactionWithSalesDto> {
+    try {
+      const transaction = await this.prisma.transaction.findUniqueOrThrow({
+        where: { transactionId },
+        include: {
+          sale: {
+            include: {
+              details: {
+                include: {
+                  product: true,
+                },
+              },
+            },
+          },
+        },
+      });
+
+      const sales =
+        transaction.sale?.map(
+          (sale) =>
+            new SaleDto(
+              sale.id,
+              Number(sale.totalAmount),
+              sale.address,
+              sale.details.map(
+                (detail) =>
+                  new SaleDetailDto(
+                    detail.productId,
+                    Number(detail.price),
+                    detail.quantity,
+                    new ProductDto(
+                      detail.product.id,
+                      detail.product.name,
+                      Number(detail.product.price),
+                      detail.product.image,
+                    ),
+                  ),
+              ),
+            ),
+        ) ?? [];
+
+      return new TransactionWithSalesDto(
+        transaction.id,
+        transaction.transactionId,
+        transaction.reference,
+        transaction.status,
+        transaction.createdAt,
+        transaction.updatedAt,
+        sales,
+      );
+    } catch (error) {
+      this.logger.error('Error getting transaction with sales', error.stack);
+      throw new NotFoundException('Transaction not found');
     }
   }
 }
