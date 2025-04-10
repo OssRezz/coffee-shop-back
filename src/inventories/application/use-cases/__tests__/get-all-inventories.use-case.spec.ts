@@ -13,33 +13,10 @@ describe('GetAllInventoriesUseCase', () => {
     useCase = new GetAllInventoriesUseCase(inventoryRepository);
   });
 
-  it('should call repository with basic pagination', async () => {
-    const dto = {
-      page_length: 10,
-      page: 1,
-    };
-
-    const expected = [{ product_id: 1, quantity: 5 }];
-    inventoryRepository.getAvailableInventories.mockResolvedValue(expected);
-
-    const result = await useCase.execute(dto);
-
-    expect(inventoryRepository.getAvailableInventories).toHaveBeenCalledWith({
-      region: undefined,
-      productType: undefined,
-      pageLength: 10,
-      page: 1,
-      cursor: undefined,
-    });
-    expect(result).toEqual(expected);
-  });
-
-  it('should call repository with filters and cursor pagination', async () => {
+  it('should call repository with both filters', async () => {
     const dto = {
       region: 2,
       product_type: 3,
-      page_length: 5,
-      cursor: 20,
     };
 
     const expected = [{ product_id: 2, quantity: 3 }];
@@ -50,19 +27,56 @@ describe('GetAllInventoriesUseCase', () => {
     expect(inventoryRepository.getAvailableInventories).toHaveBeenCalledWith({
       region: 2,
       productType: 3,
-      pageLength: 5,
-      page: undefined,
-      cursor: 20,
     });
     expect(result).toEqual(expected);
   });
 
-  it('should return empty array if no inventories found', async () => {
-    const dto = { page_length: 10 };
-    inventoryRepository.getAvailableInventories.mockResolvedValue([]);
+  it('should call repository with only region filter', async () => {
+    const dto = {
+      region: 2,
+    };
+
+    const expected = [{ product_id: 2, quantity: 3 }];
+    inventoryRepository.getAvailableInventories.mockResolvedValue(expected);
 
     const result = await useCase.execute(dto);
 
-    expect(result).toEqual([]);
+    expect(inventoryRepository.getAvailableInventories).toHaveBeenCalledWith({
+      region: 2,
+      productType: undefined, // No productType is passed
+    });
+    expect(result).toEqual(expected);
+  });
+
+  it('should call repository with only product_type filter', async () => {
+    const dto = {
+      product_type: 3,
+    };
+
+    const expected = [{ product_id: 2, quantity: 3 }];
+    inventoryRepository.getAvailableInventories.mockResolvedValue(expected);
+
+    const result = await useCase.execute(dto);
+
+    expect(inventoryRepository.getAvailableInventories).toHaveBeenCalledWith({
+      region: undefined, // No region is passed
+      productType: 3,
+    });
+    expect(result).toEqual(expected);
+  });
+
+  it('should call repository with no filters', async () => {
+    const dto = {}; // No filters
+
+    const expected = [{ product_id: 2, quantity: 3 }];
+    inventoryRepository.getAvailableInventories.mockResolvedValue(expected);
+
+    const result = await useCase.execute(dto);
+
+    expect(inventoryRepository.getAvailableInventories).toHaveBeenCalledWith({
+      region: undefined,
+      productType: undefined,
+    });
+    expect(result).toEqual(expected);
   });
 });

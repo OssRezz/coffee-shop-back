@@ -13,9 +13,6 @@ export class GetAllInventoriesUseCase {
     return this.inventoryRepository.getAvailableInventories({
       region: dto.region,
       productType: dto.product_type,
-      pageLength: dto.page_length,
-      page: dto.page,
-      cursor: dto.cursor,
     });
   }
 }

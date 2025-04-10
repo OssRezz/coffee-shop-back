@@ -7,8 +7,5 @@ export interface InventoryRepository {
   getAvailableInventories(filters: {
     region?: number;
     productType?: number;
-    pageLength: number;
-    page?: number;
-    cursor?: number;
   }): Promise<any[]>;
 }

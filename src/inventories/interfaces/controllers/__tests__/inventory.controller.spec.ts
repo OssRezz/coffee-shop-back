@@ -36,7 +36,7 @@ describe('InventoryController', () => {
   });
 
   it('should get all inventories with filters', async () => {
-    const query = { region: 1, product_type: 2, page_length: 10 };
+    const query = { region: 1, product_type: 2 };
     const resultMock = [{ id: 1, quantity: 10 }];
 
     jest

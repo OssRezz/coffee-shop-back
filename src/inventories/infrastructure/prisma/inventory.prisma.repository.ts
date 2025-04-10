@@ -92,42 +92,23 @@ export class InventoryPrismaRepository implements InventoryRepository {
   async getAvailableInventories({
     region,
     productType,
-    pageLength,
-    page,
-    cursor,
   }: {
     region?: number;
     productType?: number;
-    pageLength: number;
-    page?: number;
-    cursor?: number;
   }): Promise<any[]> {
     try {
       const where: any = {
-        quantity: { gt: 0 },
         product: {
-          ...(region && { regionId: region }),
-          ...(productType && { productTypeId: productType }),
+          ...(region && { regionId: region }), // Si existe region, agregar el filtro de region
+          ...(productType && { productTypeId: productType }), // Si existe productType, agregar el filtro de productType
           status: true,
         },
       };
 
-      const pagination: any = cursor
-        ? {
-            take: pageLength,
-            skip: 1,
-            cursor: { id: cursor },
-          }
-        : {
-            take: pageLength,
-            skip: page && page > 1 ? (page - 1) * pageLength : 0,
-          };
-
       const results = await this.prisma.inventory.findMany({
         where,
         include: { product: true },
-        orderBy: { id: 'asc' },
-        ...pagination,
+        orderBy: { id: 'asc' }, // Si es necesario, puedes ordenar por otro campo
       });
 
       return results;
