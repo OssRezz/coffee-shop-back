@@ -1,0 +1,865 @@
+{
+	"info": {
+		"_postman_id": "9e64178f-7cad-4452-911c-8d6213b0dcf3",
+		"name": "Coffee shop back",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18410354"
+	},
+	"item": [
+		{
+			"name": "regions",
+			"item": [
+				{
+					"name": "get regions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/regions",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"regions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get region",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/regions/3",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"regions",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create region",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"asdasd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/regions",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"regions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product types",
+			"item": [
+				{
+					"name": "get product types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/product-types",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"product-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get product type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/product-types/11",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"product-types",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create product types",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"ColdBrew\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/product-types",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"product-types"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "create product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Cafe de calidad",
+									"type": "text"
+								},
+								{
+									"key": "region_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "product_type_id",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "asdasd",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "12000",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/james/Pictures/Screenshots/Captura de pantalla 2025-02-08 231153.png",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{APP_URL}}/products",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Cafe de calidad 10",
+									"type": "text"
+								},
+								{
+									"key": "region_id",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "product_type_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "asdasd",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "120000",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/james/Pictures/wallpapers/wp11842517-ultra-wide-anime-landscape-wallpapers.png",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{APP_URL}}/products/10",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"products",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/products",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/products/8",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"products",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "inventories",
+			"item": [
+				{
+					"name": "get inventories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/inventories?region=2&product_type=3&page=1&page_length=2",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"inventories"
+							],
+							"query": [
+								{
+									"key": "region",
+									"value": "2",
+									"description": "opcional para filtrar por atributos del producto"
+								},
+								{
+									"key": "product_type",
+									"value": "3",
+									"description": "opcional para filtrar por atributos del producto"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "número de página (cuando no se usa cursor)"
+								},
+								{
+									"key": "page_length",
+									"value": "2",
+									"description": "número de registros por página (o por scroll)"
+								},
+								{
+									"key": "cursor",
+									"value": "23",
+									"description": "ID del último registro recibido (para scroll infinito)",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "increase",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"productId\": 3,\r\n  \"quantity\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/inventories/increase",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"inventories",
+								"increase"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "decrease",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"productId\": 3,\r\n  \"quantity\": 16\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/inventories/decrease",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"inventories",
+								"decrease"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "entries",
+			"item": [
+				{
+					"name": "create entry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/entries",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"entries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get entries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/entries",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"entries"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "customers",
+			"item": [
+				{
+					"name": "get customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/customers",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get customer by document",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL}}/customers",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"James Osorio Florez\",\r\n    \"documentNumber\" : \"1036957215\",\r\n    \"email\" : \"OssRezz.13@gmail.com\",\r\n    \"cellphone\" : \"3193270780\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/customers",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "wompi api",
+			"item": [
+				{
+					"name": "Acceptance token",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-sandbox.co.uat.wompi.dev/v1/merchants/pub_stagtest_g2u0HQd3ZMh05hsSgTS2lUV8t3s4mOt7",
+							"protocol": "https",
+							"host": [
+								"api-sandbox",
+								"co",
+								"uat",
+								"wompi",
+								"dev"
+							],
+							"path": [
+								"v1",
+								"merchants",
+								"pub_stagtest_g2u0HQd3ZMh05hsSgTS2lUV8t3s4mOt7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Card token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "pub_stagtest_g2u0HQd3ZMh05hsSgTS2lUV8t3s4mOt7",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"number\": \"4242424242424242\",\r\n  \"exp_month\": \"12\",\r\n  \"exp_year\": \"29\",\r\n  \"cvc\": \"123\",\r\n  \"card_holder\": \"Pedro Pérez\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-sandbox.co.uat.wompi.dev/v1/tokens/cards",
+							"protocol": "https",
+							"host": [
+								"api-sandbox",
+								"co",
+								"uat",
+								"wompi",
+								"dev"
+							],
+							"path": [
+								"v1",
+								"tokens",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "prv_stagtest_5i0ZGIGiFcDQifYsXxvsny7Y37tKqFWg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount_in_cents\": 150000,\r\n  \"currency\": \"COP\",\r\n  \"customer_email\": \"cliente@correo.com\",\r\n  \"payment_method\": {\r\n    \"type\": \"CARD\",\r\n    \"token\": \"tok_stagtest_5113_1294C58a010b330154A640D76265efC5\",   \r\n    \"installments\": 1\r\n  },\r\n  \"reference\": \"pedido-123456\",\r\n  \"acceptance_token\": \"eyJhbGciOiJIUzI1NiJ9.eyJjb250cmFjdF9pZCI6MjQzLCJwZXJtYWxpbmsiOiJodHRwczovL3dvbXBpLmNvbS9hc3NldHMvZG93bmxvYWRibGUvcmVnbGFtZW50by1Vc3Vhcmlvcy1Db2xvbWJpYS5wZGYiLCJmaWxlX2hhc2giOiJkMWVkMDI3NjhlNDEzZWEyMzFmNzAwMjc0N2Y0N2FhOSIsImppdCI6IjE3NDM5NTc1MzgtOTk0NDMiLCJlbWFpbCI6IiIsImV4cCI6MTc0Mzk2MTEzOH0.LzYSzQGl85Il8Q8ObH8TAb6L0qWHguQt_llH9Pm6C3I\",\r\n   \"accept_personal_auth\" : \"eyJhbGciOiJIUzI1NiJ9.eyJjb250cmFjdF9pZCI6Mzc1LCJwZXJtYWxpbmsiOiJodHRwczovL3dvbXBpLmNvbS9hc3NldHMvZG93bmxvYWRibGUvYXV0b3JpemFjaW9uLWFkbWluaXN0cmFjaW9uLWRhdG9zLXBlcnNvbmFsZXMucGRmIiwiZmlsZV9oYXNoIjoiOTVkYzcwN2M0M2UxYmViMDAwMDUyZDNkNWJhZThhMDAiLCJqaXQiOiIxNzQzOTU3NTM4LTEzMTQzIiwiZW1haWwiOiIifQ.aYldTOZ-vprNeTIvvaLaEorHNdEDiX77oAqvGmmCB7s\",\r\n    \"signature\": \"27eea49f9727f568f54cc02d8238d73018b836624b4e99684367595b85df251d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-sandbox.co.uat.wompi.dev/v1/transactions",
+							"protocol": "https",
+							"host": [
+								"api-sandbox",
+								"co",
+								"uat",
+								"wompi",
+								"dev"
+							],
+							"path": [
+								"v1",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get transaction status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api-sandbox.co.uat.wompi.dev/v1/transactions/15113-1743957572-84329",
+							"protocol": "https",
+							"host": [
+								"api-sandbox",
+								"co",
+								"uat",
+								"wompi",
+								"dev"
+							],
+							"path": [
+								"v1",
+								"transactions",
+								"15113-1743957572-84329"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "StartFragmentURL: [https://login.staging.wompi.dev/](https://login.staging.wompi.dev/)  \n• User: [procesoseleccionbackend@yopmail.com](https://mailto:procesoseleccionbackend@yopmail.com)  \n• Password: JobProcessWompi987\\*"
+		},
+		{
+			"name": "transactions",
+			"item": [
+				{
+					"name": "wompi api",
+					"item": [
+						{
+							"name": "tokenize card",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"cardNumber\": \"4242424242424242\",\r\n  \"cvc\": \"123\",\r\n  \"expMonth\": \"12\",\r\n  \"expYear\": \"29\",\r\n  \"cardHolder\": \"John Doe\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL}}/transactions/wompi/tokenize",
+									"host": [
+										"{{APP_URL}}"
+									],
+									"path": [
+										"transactions",
+										"wompi",
+										"tokenize"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get acceptance tokens",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APP_URL}}/transactions/wompi/acceptance-tokens",
+									"host": [
+										"{{APP_URL}}"
+									],
+									"path": [
+										"transactions",
+										"wompi",
+										"acceptance-tokens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create transaction",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"amountInCents\" : 150000,\r\n    \"currency\" : \"COP\",\r\n    \"customerEmail\" : \"OsssRezzz.13@gmail.com\",\r\n    \"token\" : \"tok_stagtest_5113_5d36cBed007277F3b777Ce3e72256f2e\",\r\n    \"reference\" : \"1\",\r\n    \"acceptanceToken\" : \"eyJhbGciOiJIUzI1NiJ9.eyJjb250cmFjdF9pZCI6MjQzLCJwZXJtYWxpbmsiOiJodHRwczovL3dvbXBpLmNvbS9hc3NldHMvZG93bmxvYWRibGUvcmVnbGFtZW50by1Vc3Vhcmlvcy1Db2xvbWJpYS5wZGYiLCJmaWxlX2hhc2giOiJkMWVkMDI3NjhlNDEzZWEyMzFmNzAwMjc0N2Y0N2FhOSIsImppdCI6IjE3NDM5NjM4MjYtMTExMzUiLCJlbWFpbCI6IiIsImV4cCI6MTc0Mzk2NzQyNn0.PriPK7xLEIsiTosds9QgSo_kgFmZUmQflZEe9y1nB0Y\",\r\n    \"acceptPersonalAuth\" : \"eyJhbGciOiJIUzI1NiJ9.eyJjb250cmFjdF9pZCI6Mzc1LCJwZXJtYWxpbmsiOiJodHRwczovL3dvbXBpLmNvbS9hc3NldHMvZG93bmxvYWRibGUvYXV0b3JpemFjaW9uLWFkbWluaXN0cmFjaW9uLWRhdG9zLXBlcnNvbmFsZXMucGRmIiwiZmlsZV9oYXNoIjoiOTVkYzcwN2M0M2UxYmViMDAwMDUyZDNkNWJhZThhMDAiLCJqaXQiOiIxNzQzOTYzODI2LTE3ODYyIiwiZW1haWwiOiIifQ.ECnvm6pmdxaea77pmnboyHgNeMLsYwGwpAxGD7B_Llw\",\r\n    \"installments\" : 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL}}/transactions/wompi/create?constraints=150000",
+									"host": [
+										"{{APP_URL}}"
+									],
+									"path": [
+										"transactions",
+										"wompi",
+										"create"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "150000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get transaction",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "checkout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"card\": {\r\n    \"cardNumber\": \"4242424242424242\",\r\n    \"cvc\": \"123\",\r\n    \"expMonth\": \"12\",\r\n    \"expYear\": \"29\",\r\n    \"cardHolder\": \"Pedro Pérez\"\r\n  },\r\n  \"amountInCents\": 150000,\r\n  \"currency\": \"COP\",\r\n  \"installments\": 1,\r\n  \"customer\": {\r\n    \"documentNumber\": \"123456789\",\r\n    \"name\": \"Pedro Pérez\",\r\n    \"email\": \"pedro@correo.com\",\r\n    \"cellphone\": \"3001234567\",\r\n    \"address\": \"Calle falsa 123\"\r\n  },\r\n  \"products\": [\r\n    {\r\n      \"productId\": 1,\r\n      \"price\": 10000,\r\n      \"quantity\": 1\r\n    },\r\n    {\r\n      \"productId\": 5,\r\n      \"price\": 20000,\r\n      \"quantity\": 1\r\n    },\r\n    {\r\n      \"productId\": 6,\r\n      \"price\": 30000,\r\n      \"quantity\": 1\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/transactions/checkout",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"transactions",
+								"checkout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get transaction",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sales",
+			"item": [
+				{
+					"name": "create sale",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"transactionId\": null,\r\n  \"address\": \"Calle 123 #45-67, Bogotá\",\r\n  \"totalAmount\": 30000,\r\n  \"details\": [\r\n    {\r\n      \"productId\": 4,\r\n      \"price\": 10000,\r\n      \"quantity\": 1\r\n    },\r\n    {\r\n      \"productId\": 5,\r\n      \"price\": 20000,\r\n      \"quantity\": 1\r\n    },\r\n    {\r\n      \"productId\": 6,\r\n      \"price\": 20000,\r\n      \"quantity\": 1\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/sales",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"sales"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "APP_URL",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
