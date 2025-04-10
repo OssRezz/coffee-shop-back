@@ -6,9 +6,11 @@ import {
   IsOptional,
 } from 'class-validator';
 import { Type } from 'class-transformer';
+import { Transform } from 'class-transformer';
 
 export class UpdateProductDto {
   @IsString()
+  @Transform(({ value }) => value?.trim()) // Añadido para recortar espacios
   name: string;
 
   @Type(() => Number)
@@ -20,6 +22,7 @@ export class UpdateProductDto {
   product_type_id: number;
 
   @IsString()
+  @Transform(({ value }) => value?.trim()) // Añadido para recortar espacios
   description: string;
 
   @Type(() => Number)
@@ -33,5 +36,6 @@ export class UpdateProductDto {
 
   @IsOptional()
   @IsString()
+  @Transform(({ value }) => value?.trim()) // Añadido para recortar espacios
   image?: string | null;
 }

@@ -7,9 +7,9 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 
-class SaleDetailDto {
+export class SaleDetailDto {
   @IsNotEmpty()
   @IsNumber()
   productId: number;
@@ -30,6 +30,7 @@ export class CreateSaleDto {
 
   @IsNotEmpty()
   @IsString()
+  @Transform(({ value }) => value?.trim())
   address: string;
 
   @IsNotEmpty()

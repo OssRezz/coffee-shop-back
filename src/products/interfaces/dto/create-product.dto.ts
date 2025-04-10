@@ -7,10 +7,12 @@ import {
   IsPositive,
 } from 'class-validator';
 import { Type } from 'class-transformer';
+import { Transform } from 'class-transformer';
 
 export class CreateProductDto {
   @IsNotEmpty()
   @IsString()
+  @Transform(({ value }) => value?.trim()) // Añadido para recortar espacios
   name: string;
 
   @IsNotEmpty()
@@ -25,6 +27,7 @@ export class CreateProductDto {
 
   @IsNotEmpty()
   @IsString()
+  @Transform(({ value }) => value?.trim()) // Añadido para recortar espacios
   description: string;
 
   @IsNotEmpty()
@@ -35,6 +38,7 @@ export class CreateProductDto {
 
   @IsOptional()
   @IsString()
+  @Transform(({ value }) => value?.trim()) // Añadido para recortar espacios
   image?: string | null;
 
   @IsOptional()

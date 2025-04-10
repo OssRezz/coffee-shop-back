@@ -1,11 +1,9 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Param,
   ParseIntPipe,
-  Patch,
   Post,
   Put,
   UploadedFile,
@@ -60,8 +58,6 @@ export class ProductController {
 
   @Get('/:id')
   async getById(@Param('id', ParseIntPipe) id: number) {
-    console.log('➡️ GET /products/:id ejecutado');
-
     const product = await this.getProductsByIdUseCase.execute(id);
     return buildResponse(product, `Product with id ${id} found`);
   }
@@ -86,15 +82,5 @@ export class ProductController {
       if (newImage) deleteUploadedFile(`${PRODUCT_PATH}/${newImage}`);
       throw error;
     }
-  }
-
-  @Delete('/:id')
-  async delete() {
-    return {};
-  }
-
-  @Patch('/:id')
-  async changeStatus() {
-    return {};
   }
 }

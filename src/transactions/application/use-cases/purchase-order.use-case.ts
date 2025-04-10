@@ -8,7 +8,6 @@ import {
 import { CustomerRepository } from 'src/customers/domain/ports/customer.repository';
 import { WompiGatewayPort } from 'src/transactions/domain/ports/payment-gateway.port';
 import { generateTransactionReference } from 'src/common/helpers/generate-transaction-reference.helper';
-import { retryTransactionStatus } from 'src/common/helpers/retry-transaction-status.helper';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TransactionStatus } from '@prisma/client';
 import { WinstonLogger } from 'src/common/logger/winston-logger.service';
@@ -16,6 +15,7 @@ import { TransactionRepository } from 'src/transactions/domain/ports/transaction
 import { CreateTransactionDto } from 'src/transactions/interfaces/dto/create-transaction.dto';
 import { InventoryRepository } from 'src/inventories/domain/ports/inventory.repository';
 import { CreateSaleUseCase } from 'src/sales/application/use-cases/create-sale.use-case';
+import { handleRetryAndUpdateStatus } from 'src/common/helpers/retry-transaction-status.helper';
 
 @Injectable()
 export class PurchaseOrderUseCase {
@@ -107,22 +107,21 @@ export class PurchaseOrderUseCase {
       );
 
       // 7. Retry si queda en PENDING
-      if (finalStatus === 'PENDING') {
-        finalStatus = await retryTransactionStatus(
-          async () => {
-            const { status } = await this.paymentGateway.getTransactionStatus(
-              wompiTransaction.id,
-            );
-            return status;
-          },
-          3,
-          3000,
-          this.logger,
-        );
+      const delayMs = process.env.NODE_ENV === 'test' ? 0 : 3000;
 
-        await this.transactionRepository.updateStatus(
+      if (finalStatus === 'PENDING') {
+        finalStatus = await handleRetryAndUpdateStatus(
           wompiTransaction.id,
-          finalStatus as TransactionStatus,
+          () =>
+            this.paymentGateway
+              .getTransactionStatus(wompiTransaction.id)
+              .then((r) => r.status),
+          3,
+          delayMs,
+          this.logger,
+          this.transactionRepository.updateStatus.bind(
+            this.transactionRepository,
+          ),
         );
 
         if (finalStatus !== 'APPROVED') {

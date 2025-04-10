@@ -6,6 +6,6 @@ export function ensureUploadFolderExists() {
 
   if (!fs.existsSync(folderPath)) {
     fs.mkdirSync(folderPath, { recursive: true });
-    console.log('📂 Carpeta de uploads creada:', folderPath);
+    console.log('Carpeta de uploads creada:', folderPath);
   }
 }

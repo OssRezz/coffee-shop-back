@@ -8,7 +8,7 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
-class CardDataDto {
+export class CardDataDto {
   @IsString()
   cardNumber: string;
 
@@ -25,7 +25,7 @@ class CardDataDto {
   cardHolder: string;
 }
 
-class CustomerDataDto {
+export class CustomerDataDto {
   @IsString()
   documentNumber: string;
 
@@ -42,7 +42,7 @@ class CustomerDataDto {
   address: string;
 }
 
-class ProductDto {
+export class ProductDto {
   @IsNumber()
   productId: number;
 

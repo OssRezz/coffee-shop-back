@@ -154,8 +154,6 @@ export class WompiGateway implements WompiGatewayPort {
       integrityKey: this.integrityKey,
     });
 
-    console.log(signature);
-
     try {
       const response = await firstValueFrom(
         this.http.post(

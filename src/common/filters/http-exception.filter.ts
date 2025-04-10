@@ -14,8 +14,17 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const status = exception.getStatus();
     const exceptionResponse = exception.getResponse();
 
-    const message = (exceptionResponse as any).message || 'Unexpected error';
-    const errorData = (exceptionResponse as any).data || null;
+    // Si el error es un string, lo usamos como mensaje directamente
+    const message =
+      typeof exceptionResponse === 'string'
+        ? exceptionResponse
+        : (exceptionResponse as any).message || 'Unexpected error';
+
+    // Si el error es un objeto, intentamos extraer los datos adicionales
+    const errorData =
+      typeof exceptionResponse === 'object' && 'data' in exceptionResponse
+        ? (exceptionResponse as any).data
+        : null;
 
     response.status(status).json({
       success: false,

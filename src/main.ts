@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { UnprocessableEntityException, ValidationPipe } from '@nestjs/common';
@@ -6,7 +7,7 @@ import { ResponseInterceptor } from './common/interceptors/response.interceptor'
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import * as express from 'express';
 import { join } from 'path';
-import { ensureUploadFolderExists } from './common/helpers/ensure-folder.helper';
+import { ensureUploadFolderExists } from './common/helpers/ensure-upload-folder-exists';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -32,7 +33,6 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
   ensureUploadFolderExists();
   app.use('/uploads', express.static(join(process.cwd(), 'uploads')));
-  // console.log('Serving from:', join(__dirname, '..', 'uploads'));
   app.enableCors();
   const PORT = process.env.PORT || 3000;
   await app.listen(PORT);

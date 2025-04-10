@@ -6,9 +6,9 @@ export function deleteUploadedFile(filePath: string) {
 
   fs.unlink(fullPath, (err) => {
     if (err) {
-      console.error(`❌ Error deleting file: ${fullPath}`, err);
+      console.error(`Error deleting file: ${fullPath}`, err);
     } else {
-      console.log(`🧹 File deleted: ${fullPath}`);
+      console.log(`File deleted: ${fullPath}`);
     }
   });
 }
