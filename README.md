@@ -1,4 +1,3 @@
-
 # ☕ Coffee Shop API
 
 Este proyecto es una API desarrollada con [NestJS](https://nestjs.com/) y [Prisma](https://www.prisma.io/) ORM, dockerizada para su despliegue en producción o uso local simplificado.
@@ -216,9 +215,9 @@ La carpeta `uploads/` y los archivos de logs están montados como volúmenes en 
 
 ## 🧠 Análisis y Proceso de Desarrollo
 
-Al recibir la prueba técnica, realicé un análisis de los requerimientos. Entendiendo que se trataba de una tienda, decidí enfocarla en un contexto específico: una tienda de café. Por esta razón, nombré el proyecto **"Coffee Shop"**.
+Comencé con un análisis de los requerimientos. Entendiendo que se trataba de una tienda, decidí enfocarla en un contexto específico: una tienda de café. Por esta razón, nombré el proyecto **"Coffee Shop"**.
 
-![Diagrama de entidades](docs/Mer Coffee shop.drawio.png)
+[Diagrama draw.io](https://i.imgur.com/p1zcilO.png)
 
 Como primer paso, diseñé un diagrama en **draw.io** donde modelé las entidades y sus relaciones. Como valor agregado, creé dos tablas adicionales: `region` (para representar la región del café) y `product_type` (para definir si el café es en grano, cápsulas, etc.).
 
